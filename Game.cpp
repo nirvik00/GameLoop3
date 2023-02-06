@@ -54,9 +54,52 @@ void Game::handleEvents()
 	case(SDL_QUIT):
 		this->isRunning = false;
 		break;
+
+	case SDL_KEYDOWN:
+		printf("Key press detected\n");
+		std::cout
+			<< "Key Pressed! Key Code: "
+			<< e.key.keysym.sym
+			<< ", Key Name: "
+			<< SDL_GetKeyName(e.key.keysym.sym)
+			<< '\n';
+		if (e.key.keysym.sym == 27) 
+		{
+			std::cout << "escape button pressed\n";
+			isRunning = false;
+		}
+
+		player->dst.x += 32;
+		break;
+
+	case SDL_KEYUP:
+		printf("Key release detected\n");
+		break;
+
+	case(SDL_MOUSEBUTTONDOWN):
+		// printf("mouse button pressed detected\n");
+		break;
+
+	case(SDL_MOUSEBUTTONUP):
+		// printf("mouse button release detected\n");
+		if (e.button.button == SDL_BUTTON_LEFT) {
+			// printf("mouse button LEFT release detected\n");
+		}
+		else if (e.button.button == SDL_BUTTON_RIGHT) {
+			// printf("mouse button RIGHT release detected\n");
+		}
+		break;
+	case(SDL_MOUSEMOTION):
+		// printf("mouse motition detected\n");
+		break;
 	default:
 		break;
 	}
+
+	int x, y;
+	SDL_GetMouseState(&x, &y);
+	std::cout << "Mouse is at " << x << ", " << y;
+
 }
 
 void Game::update()

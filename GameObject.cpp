@@ -15,9 +15,7 @@ GameObject::GameObject(const char* filename, int x, int y)
 	src.x = src.y=0;
 	src.w = src.h = 232;
 	dst.x = dst.y = x;
-	dst.w = dst.h = 64;
-
-	
+	dst.w = dst.h = 64;	
 }
 
 GameObject::~GameObject()
@@ -25,16 +23,11 @@ GameObject::~GameObject()
 
 void GameObject::update()
 {
-	/*this->objTex = IMG_LoadTexture(Game::gRenderer, "player.png");
-	if (this->objTex == NULL)
+	if (dst.x > 0 && dst.x < 800)
 	{
-		std::cout << "error loading texture in player GameObject\n";
+		dst.x++;
 	}
-	else 
-	{
-		SDL_RenderCopy(Game::gRenderer, this->objTex, &src, &dst);
-	}	
-	*/
+
 }
 
 void GameObject::render()

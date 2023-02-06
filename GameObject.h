@@ -11,7 +11,7 @@ private:
 	float xpos;
 	float ypos;
 	SDL_Texture* objTex;
-	SDL_Rect src, dst;
+	
 
 public:
 	GameObject(const char*, int, int);
@@ -19,5 +19,8 @@ public:
 
 	void update();
 	void render();
+
+	SDL_Rect src, dst;
+	
 
 };

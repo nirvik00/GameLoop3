@@ -9,14 +9,14 @@
 
 Game* game = NULL;
 
-int main() {
+int main() {	
 	game = new Game();
 	game->init();
 
 	while (game->running() == true)
 	{
 		game->handleEvents();
-
+		game->update();
 		game->render();
 	}
 
