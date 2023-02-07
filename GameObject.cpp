@@ -12,10 +12,14 @@ GameObject::GameObject(const char* filename, int x, int y)
 	this->xpos = x;
 	this->ypos = y;
 	
-	src.x = src.y=0;
-	src.w = src.h = 232;
-	dst.x = dst.y = x;
-	dst.w = dst.h = 64;	
+	src.x = 0;
+	src.y = 0;
+	src.w = 232;
+	src.h = 232;
+	dst.x = xpos;
+	dst.y = ypos;
+	dst.w = 64;
+	dst.h = 64;
 }
 
 GameObject::~GameObject()
@@ -23,10 +27,7 @@ GameObject::~GameObject()
 
 void GameObject::update()
 {
-	if (dst.x > 0 && dst.x < 800)
-	{
-		dst.x++;
-	}
+	
 
 }
 

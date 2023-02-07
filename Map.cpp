@@ -44,7 +44,9 @@ Map::Map() {
 }
 
 void Map::update()
-{}
+{
+
+}
 
 void Map::render() {
 	for (int row = 0; row < 20; row++) {

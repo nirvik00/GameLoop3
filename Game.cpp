@@ -7,10 +7,16 @@ GameObject* player = nullptr;
 GameObject* enemy = nullptr;
 Map* map = nullptr;
 
+
+SDL_Rect src2, dst2;
+SDL_Texture* sprite = NULL;
+
+
 Game::Game() 
 {
 	gWindow = NULL;
 }
+
 
 void Game::init()
 {
@@ -43,7 +49,18 @@ void Game::init()
 	enemy = new GameObject("assets/enemy.png", 230, 230);
 	map = new Map();
 
+
+	src2.x = 0;
+	src2.y = 0;
+	src2.w = 64;
+	src2.h = 64;
+	dst2.x = 200;
+	dst2.y = 450;
+	dst2.w = 64;
+	dst2.h = 64;
+	sprite = IMG_LoadTexture(Game::gRenderer, "assets/hero_idle.png");
 }
+
 
 void Game::handleEvents()
 {
@@ -56,24 +73,34 @@ void Game::handleEvents()
 		break;
 
 	case SDL_KEYDOWN:
-		printf("Key press detected\n");
-		std::cout
-			<< "Key Pressed! Key Code: "
-			<< e.key.keysym.sym
-			<< ", Key Name: "
-			<< SDL_GetKeyName(e.key.keysym.sym)
-			<< '\n';
+		// printf("Key press detected\n");
+		// std::cout << "Key Pressed! Key Code: " << e.key.keysym.sym << ", Key Name: " << SDL_GetKeyName(e.key.keysym.sym) << '\n';
+
 		if (e.key.keysym.sym == 27) 
 		{
 			std::cout << "escape button pressed\n";
 			isRunning = false;
 		}
-
-		player->dst.x += 32;
+		if (e.key.keysym.sym == 1073741903) // "Right"
+		{
+			player->dst.x += 32;
+		}
+		if (e.key.keysym.sym == 1073741904) // "Left"
+		{
+			player->dst.x -= 32;
+		}
+		if (e.key.keysym.sym == 1073741906) // "Up"
+		{
+			player->dst.y -= 32;
+		}
+		if (e.key.keysym.sym == 1073741905) // "Down"
+		{
+			player->dst.y += 32;
+		}
 		break;
 
 	case SDL_KEYUP:
-		printf("Key release detected\n");
+		// printf("Key release detected\n");
 		break;
 
 	case(SDL_MOUSEBUTTONDOWN):
@@ -98,16 +125,31 @@ void Game::handleEvents()
 
 	int x, y;
 	SDL_GetMouseState(&x, &y);
-	std::cout << "Mouse is at " << x << ", " << y;
+	// std::cout << "Mouse is at " << x << ", " << y;
+}
+
+
+void Game::handleKeyEvents() 
+{
 
 }
+
 
 void Game::update()
 {
 	player->update();
 	enemy->update();
 	map->update();
+	
+
+	if (xcounter > 2) {
+		xcounter = 0;
+	}
+	src2.x = xcounter * 64;
+	std::cout << "counter: " << xcounter << " frame: " << src2.x << "\n";
+	xcounter++;
 }
+
 
 void Game::render()
 {
@@ -123,10 +165,13 @@ void Game::render()
 
 	player->render();
 	enemy->render();
+	
+	SDL_RenderCopy(this->gRenderer, sprite, &src2, &dst2);
 
 	SDL_SetRenderDrawColor(this->gRenderer, 0, 0, 255, 0);
 	SDL_RenderPresent(this->gRenderer);
 }
+
 
 void Game::close()
 {
@@ -136,3 +181,9 @@ void Game::close()
 	std::cout << "window closed...\n";
 }
 
+
+void getFrames() {
+	src2.x = 32;
+	src2.y = 0;
+	
+}

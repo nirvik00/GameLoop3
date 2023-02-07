@@ -10,6 +10,10 @@ class Game {
 private:
 	SDL_Window* gWindow;
 	bool isRunning;
+	void handleKeyEvents();
+
+	int xcounter = 0;
+	int ycounter = 0;
 
 public:
 	static int d;
